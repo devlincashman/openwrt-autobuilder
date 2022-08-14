@@ -34,13 +34,13 @@ echo "Installing feeds"
 # rm -rf package/lean/luci-theme-argon
 # git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
 
-echo ""
-echo "Downloading Custom packages"
-git clone --depth=1 https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
-git clone --depth=1 https://github.com/kongfl888/luci-app-adguardhome.git package/luci-app-adguardhome
-git clone --depth=1 -b master https://github.com/vernesong/OpenClash.git package/OpenClash
-mv package/OpenClash/luci-app-openclash package/luci-app-openclash
-rm -rf package/OpenClash
+# echo ""
+# echo "Downloading Custom packages"
+# git clone --depth=1 https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
+# git clone --depth=1 https://github.com/kongfl888/luci-app-adguardhome.git package/luci-app-adguardhome
+# git clone --depth=1 -b master https://github.com/vernesong/OpenClash.git package/OpenClash
+# mv package/OpenClash/luci-app-openclash package/luci-app-openclash
+# rm -rf package/OpenClash
 
 cd $OPENWRT_PATH
 
