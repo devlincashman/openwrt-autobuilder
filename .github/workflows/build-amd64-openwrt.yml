@@ -44,6 +44,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        repository: coolsnowwolf/lede
+        path: openwrt
+
     - name: Initialization environment
       env:
         DEBIAN_FRONTEND: noninteractive
@@ -51,21 +57,14 @@ jobs:
         sudo -E apt update
         sudo -E apt -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync
         sudo timedatectl set-timezone "$TZ"
-        sudo mkdir -p /workdir
-        sudo chown $USER:$GROUPS /workdir
-
-    - name: Clone source code
-      working-directory: /workdir
-      run: |
-        git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
-        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
     - name: Launching prepare script
       env:
         GITHUB_REPO: ${{ github.repository }}
         GITHUB_USER: ${{ github.actor }}
       run: |
-        chmod +x $PREPARE_SH
+        chmod +x prepare.sh
+        ./prepare.sh openwrt
         cd openwrt
         $GITHUB_WORKSPACE/$PREPARE_SH
 
