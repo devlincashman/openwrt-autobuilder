@@ -6,7 +6,9 @@
 # Blog: https://p3terx.com
 #=================================================
 
-OPENWRT_PATH=`pwd`
+export OPENWRT_PATH
+OPENWRT_PATH=$(pwd)
+
 echo "Post-Install Script [Start]"
 
 echo "Post-Install Script [End]"

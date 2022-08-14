@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-OPENWRT_PATH=`pwd`
+OPENWRT_PATH=$(pwd)
 echo "Openwrt path: $OPENWRT_PATH"
 echo ""
 
@@ -42,7 +42,7 @@ echo "Installing feeds"
 # mv package/OpenClash/luci-app-openclash package/luci-app-openclash
 # rm -rf package/OpenClash
 
-cd $OPENWRT_PATH
+cd "$OPENWRT_PATH" || exit
 
 ##################################
 # Settings
@@ -52,7 +52,7 @@ echo "Configuring ... openwrt"
 # Modify default IP
 sed -i 's/192.168.1.1/10.10.10.1/g' package/base-files/files/bin/config_generate
 
-if [ ! -z "$OPENWRT_ROOT_PASSWORD" ]; then
+if [ -n "$OPENWRT_ROOT_PASSWORD" ]; then
   echo "WARN: root password will change from your secret from 'OPENWRT_ROOT_PASSWORD' secret"
   # Modify password of root if present (encoded password)
   # For example: passwot = $1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.
@@ -64,7 +64,7 @@ echo "Configuring ... "
 
 echo " -> Tagging RELEASE_TAG"
 TEMP=$(date +"OpenWrt_%Y%m%d_%H%M%S_")$(git rev-parse --short HEAD)
-echo "RELEASE_TAG=$TEMP" >> $GITHUB_ENV
+echo "RELEASE_TAG=$TEMP" >> "$GITHUB_ENV"
 
 echo "-> writing luci-app-easyupdate"
 #required>>add "DISTRIB_GITHUB" to "zzz-default-settings"

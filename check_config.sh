@@ -6,24 +6,23 @@ ABORT_ON_ERROR='false'
 function validate_config() {
   local file=$1
   echo "  Enter ${file} file"
-  while IFS= read -r line
-  do
+  while IFS= read -r line; do
     if [[ -n $line ]]; then
-      config=`echo $line | grep '^CONFIG'`
+      config=$(echo "$line" | grep '^CONFIG')
       if [[ -n $config ]]; then
-        has_config=`cat openwrt/.config | grep $line`
+        has_config=$(grep "$line" "openwrt/.config")
         if [[ -z $has_config ]]; then
           echo "Missing config: $config"
           ABORT_ON_ERROR='true'
         fi
       fi
     fi
-  done < $file
+  done < "$file"
 }
 
 echo "Checking .config"
-validate_config $CONFIG_FILE
-validate_config $FILE
+validate_config "$CONFIG_FILE"
+validate_config "$FILE"
 
 if [[ "$ABORT_ON_ERROR" == 'true' ]]; then
   echo 'Fail and exit run action.'
