@@ -64,9 +64,8 @@ jobs:
         GITHUB_USER: ${{ github.actor }}
       run: |
         chmod +x prepare.sh
-        ./prepare.sh openwrt
         cd openwrt
-        $GITHUB_WORKSPACE/$PREPARE_SH
+        ../prepare.sh
 
     - name: Use .config file
       run: |

@@ -6,10 +6,9 @@
 # Blog: https://p3terx.com
 #=================================================
 
-OPENWRT_PATH=${1:-openwrt}
+# OPENWRT_PATH=${1:-openwrt}
 
-cd "$OPENWRT_PATH" || exit 1
-echo "Openwrt path: $OPENWRT_PATH"
+# echo "Openwrt path: $OPENWRT_PATH"
 
 echo "Perpare Script [Start]"
 ##################################
