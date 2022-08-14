@@ -14,14 +14,12 @@ echo "Perpare Script [Start]"
 ##################################
 # Custom feed
 ##################################
-echo "add kenzok8/openwrt-packages feeds" # chinese feed of default packages? questionable
-echo "src-git kenzok8 https://github.com/kenzok8/small-package" >> feeds.conf.default
+# echo "add kenzok8/openwrt-packages feeds" # chinese feed of default packages? questionable
+# echo "src-git kenzok8 https://github.com/kenzok8/small-package" >> feeds.conf.default
 
-echo ""
 echo "Updating feeds"
 ./scripts/feeds update -a
 
-echo ""
 echo "Installing feeds"
 ./scripts/feeds install -a
 
@@ -41,8 +39,6 @@ echo "Installing feeds"
 # git clone --depth=1 -b master https://github.com/vernesong/OpenClash.git package/OpenClash
 # mv package/OpenClash/luci-app-openclash package/luci-app-openclash
 # rm -rf package/OpenClash
-
-cd "$OPENWRT_PATH" || exit
 
 ##################################
 # Settings
@@ -77,6 +73,6 @@ sed -i "/DISTRIB_VERSIONS/a\echo \"DISTRIB_VERSIONS=\'${TEMP:8}\'\" >> /etc/open
 sed -i "s/OpenWrt /${GITHUB_USER} compiled (${TEMP:8}) \/ OpenWrt /g" package/lean/default-settings/files/zzz-default-settings
 
 # Modify default theme
-# sed -i 's/bootstrap/argon/g' package/feeds/luci/luci-base/root/etc/config/luci
+sed -i 's/bootstrap/argon/g' package/feeds/luci/luci-base/root/etc/config/luci
 
 echo "Perpare Script [End]"
