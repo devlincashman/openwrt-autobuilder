@@ -14,7 +14,7 @@ echo "Perpare Script [Start]"
 ##################################
 # Custom feed
 ##################################
-echo "add kenzok8/openwrt-packages feeds"
+echo "add kenzok8/openwrt-packages feeds" # chinese feed of default packages? questionable
 echo "src-git kenzok8 https://github.com/kenzok8/small-package" >> feeds.conf.default
 
 echo ""
@@ -50,7 +50,7 @@ cd "$OPENWRT_PATH" || exit
 echo ""
 echo "Configuring ... openwrt"
 # Modify default IP
-sed -i 's/192.168.1.1/10.10.10.1/g' package/base-files/files/bin/config_generate
+# sed -i 's/192.168.1.1/10.10.10.1/g' package/base-files/files/bin/config_generate
 
 if [ -n "$OPENWRT_ROOT_PASSWORD" ]; then
   echo "WARN: root password will change from your secret from 'OPENWRT_ROOT_PASSWORD' secret"
