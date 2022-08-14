@@ -77,13 +77,13 @@ jobs:
         echo "Review .config file"
         cat .config
 
-    - name: Check .config file
-      id: check_config
-      if: env.CHECK_CONFIG == 'true'
-      run: |
-        chmod +x check_config.sh
-        ./check_config.sh common.config
-        echo "::set-output name=status::success"
+    # - name: Check .config file
+    #   id: check_config
+    #   if: env.CHECK_CONFIG == 'true'
+    #   run: |
+    #     chmod +x check_config.sh
+    #     ./check_config.sh common.config
+    #     echo "::set-output name=status::success"
 
     - name: Download package
       id: package
