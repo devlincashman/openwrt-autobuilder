@@ -13,11 +13,11 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     strategy:
-    matrix:
-      openwrt:
-        - openwrt/openwrt
-        - coolsnowwolf/lede
-        - immortalwrt/immortalwrt
+      matrix:
+        openwrt:
+          - openwrt/openwrt
+          - coolsnowwolf/lede
+          - immortalwrt/immortalwrt
 
     steps:
       - name: Maximize build space
