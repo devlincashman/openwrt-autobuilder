@@ -32,6 +32,12 @@ env:
 jobs:
   build:
     runs-on: ubuntu-22.04
+    strategy:
+    matrix:
+      openwrt:
+        - openwrt/openwrt
+        - coolsnowwolf/lede
+        - immortalwrt/immortalwrt
 
     steps:
       - name: Maximize build space
@@ -44,8 +50,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          # repository: coolsnowwolf/lede
-          repository: openwrt/openwrt
+          repository: ${{ matrix.openwrt }}
 
       - name: Checkout
         uses: actions/checkout@v3
