@@ -63,7 +63,7 @@ jobs:
         env:
           GITHUB_REPO: ${{ github.repository }}
           GITHUB_USER: ${{ github.actor }}
-        working-directory: $GITHUB_WORKSPACE/openwrt
+        working-directory: openwrt
         run: |
           scripts/feeds update -a
           scripts/feeds install -a
