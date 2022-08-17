@@ -56,36 +56,21 @@ jobs:
           DEBIAN_FRONTEND: noninteractive
         run: |
           sudo -E apt update
-          sudo -E apt -y install build-essential gawk gcc-multilib flex git gettext libncurses5-dev libssl-dev python3-distutils rsync unzip zlib1g-dev
+          sudo -E apt -y install build-essential gawk gcc-multilib flex git gettext libncurses5-dev libssl-dev python3-distutils rsync unzip zlib1g-dev libelf-dev
           sudo timedatectl set-timezone "$TZ"
 
-      - name: Launching prepare script
+      - name: Configure packages
         env:
           GITHUB_REPO: ${{ github.repository }}
           GITHUB_USER: ${{ github.actor }}
+        working-directory: $GITHUB_WORKSPACE/openwrt
         run: |
-          chmod +x prepare.sh
-          cd openwrt
-          ../prepare.sh
-
-      - name: Use .config file
-        run: |
-          [ -e amd64.config ] && cp amd64.config openwrt/.config
-          cat common.config >> openwrt/.config
-          cd openwrt
+          scripts/feeds update -a
+          scripts/feeds install -a
+          cp ../common.config .config
           make defconfig
-          echo "Review .config file"
-          cat .config
 
-      # - name: Check .config file
-      #   id: check_config
-      #   if: env.CHECK_CONFIG == 'true'
-      #   run: |
-      #     chmod +x check_config.sh
-      #     ./check_config.sh common.config
-      #     echo "::set-output name=status::success"
-
-      - name: Download package
+      - name: Download packages
         id: package
         run: |
           cd openwrt

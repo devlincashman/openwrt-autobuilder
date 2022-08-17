@@ -21,7 +21,7 @@ echo "Updating feeds"
 ./scripts/feeds update -a
 
 echo "Installing feeds"
-./scripts/feeds install -a
+./scripts/feeds update -a
 
 ##################################
 # Custom package
