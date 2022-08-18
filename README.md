@@ -9,7 +9,9 @@ Openwrt amd64 (x86 64bit) CPU 自動鏡像生成 Based on [P3TERX/Actions-OpenWr
 
 ## Configuration
 
-- Gateway: 10.10.10.1
+- Gateway: 192.168.1.1
+- Add additional luci packages
+- Add additional tools
 - Theme: bootstrap (default)
 - Change Root password if present (Copy encoded password from /etc/shadow)
 

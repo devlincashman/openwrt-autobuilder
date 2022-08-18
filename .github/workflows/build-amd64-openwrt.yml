@@ -13,6 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     strategy:
+      fail-fast: false
       matrix:
         openwrt:
           - openwrt/openwrt
@@ -50,6 +51,7 @@ jobs:
           GITHUB_REPO: ${{ github.repository }}
           GITHUB_USER: ${{ github.actor }}
         run: |
+          scripts/feeds clean
           scripts/feeds update -a
           scripts/feeds install -a
           cp openwrt-autobuilder/common.config .config
@@ -95,9 +97,7 @@ jobs:
       - name: Generate release tag
         id: tag
         run: |
-          echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
-          touch release.txt
-          echo "::set-output name=status::success"
+          echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")" >> release.txt
 
       - name: Upload firmware to release
         uses: softprops/action-gh-release@v1
